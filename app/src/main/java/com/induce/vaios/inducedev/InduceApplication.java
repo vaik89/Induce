@@ -13,6 +13,8 @@ public class InduceApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // Required - Initialize the Parse SDK
+        Parse.enableLocalDatastore(this);
+
         Parse.initialize(this);
 
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
