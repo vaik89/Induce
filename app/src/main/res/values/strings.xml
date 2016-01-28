@@ -4,4 +4,11 @@
     <string name="facebook_app_id">225957607745088</string>
     <string name="parse_app_id">ljkNfawATkiFNrqvUTXqdWGT45pqYG3vcPIfo5AA</string>
     <string name="parse_client_key">AYW9oi9ZV2EV5Ss7PH4CanAELYfgJPkr0w47uOyA</string>
+
+    <string name="search_label">AB</string>
+    <string name="search_hint">Search Products</string>
+    <string name="settings_description">List of Products</string>
+
+
+
 </resources>

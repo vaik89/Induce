@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
+        android:id="@+id/carddemo_recyclerviewup"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        card:list_card_layout_resourceID="@layout/columncardstyle" />
+
+    <SearchView android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/search" />
+    <ListView android:layout_width="fill_parent" android:id="@+id/list"
+        android:layout_height="wrap_content" />
+
+    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
+        android:id="@+id/carddemo_recyclerviewdown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card:list_card_layout_resourceID="@layout/native_recyclerview_card_layout" />
+
+</LinearLayout>

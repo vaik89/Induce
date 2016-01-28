@@ -2,16 +2,23 @@ package com.induce.vaios.inducedev;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.appevents.AppEventsLogger;
+
+import me.relex.circleindicator.CircleIndicator;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -20,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ResideMenuItem itemProfile;
 
     private ResideMenuItem itemSettings;
+
+    private static final int NUM_PAGES = 5;
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +42,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+// Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+
+
+        Button buttoncheckin= (Button) findViewById(R.id.checkinbutton);
+        buttoncheckin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Checkin is pressed!", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(MainActivity.this, MapDraw.class);
+
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        Button buttonlist= (Button) findViewById(R.id.mylistbutton);
+        buttonlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Button is pressed!", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(MainActivity.this, listandsearchactivity.class);
+
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        Button buttoncard= (Button) findViewById(R.id.mycardbutton);
+        buttoncard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Button card pressed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        //test FAB button
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -122,6 +175,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
+        ViewPager ignored_view = (ViewPager) findViewById(R.id.pager);
+        resideMenu.addIgnoredView(ignored_view);
+
     }
 
     @Override
@@ -150,5 +206,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Toast.makeText(MainActivity.this, "Menu is closed!", Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return resideMenu.dispatchTouchEvent(ev);
+
+    }
+
+
+    /**
+     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * sequence.
+     */
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            return new firstpageimagefragment();
+
+
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
+    }
 
 }
